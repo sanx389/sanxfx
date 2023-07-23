@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SANX-fxC</title>
+  <link rel="stylesheet" href="sitocompleto.css">
+  
+</head>
+<body>
+  <div class="container">
+    <div class="main-content">
+      <!-- Tabella conti -->
+      <h1 class="color-changing">SANX Fx-calculator</h1>
+      <div class="barra">
+        <label for="contoFondatoSelect">Seleziona il conto fondato:</label>
+        <select id="contoFondatoSelect">
+          <option value="10001">FTMO10k</option>
+          <option value="20001">FTMO20k</option>
+          <option value="40000">FTMO40k</option>
+		  <option value="80000">FTMO80k</option>
+          <option value="160000">FTMO160k</option>
+          <option value="5000">MFF5k</option>
+		  <option value="10000">MFF10k</option>
+          <option value="20000">MFF20k</option>
+          <option value="50000">MFF50k</option>
+		  <option value="100000">MFF100k</option>
+          <option value="200000">MFF200k</option>
+          <option value="300000">MFF300k</option>
+        </select>
+        <br>
+        <label for="contoFondatoValue">Valore conto fondato:</label>
+        <input type="text" id="contoFondatoValue" >
+        <input type="checkbox" id="contoFondatoCheckbox" checked>
+        <br>
+        <label for="contoRealeValue">Valore conto reale:</label>
+        <input type="number" id="contoRealeValue">
+        <input type="checkbox" id="contoRealeCheckbox" checked>
+        <br>
+        <button onclick="calcolaSomma()">Esegui</button>
+      </div>
+      <!-- Fine tabella conti -->
+
+      <!-- Contenuto sopra le 4 fasi -->
+	  <h1>Scegli una fase:</h1>
+      <div class="form-container">
+        <div class="form-option selected" onclick="showForm('fase1')">Fase 1</div>
+        <div class="form-option" onclick="showForm('fase2')">Fase 2</div>
+        <div class="form-option" onclick="showForm('profitto')">Profitto</div>
+        <div class="form-option" onclick="showForm('simulazione')">Simulazione</div>
+      </div>
+
+      <div class="form-content show" id="fase1-form">
+        <h2>Fase 1</h2>
+        <form>
+<body>
+    <table style="margin: 0 auto;">
+        <tr>
+            <td>
+                <div class="container">
+                    <h1 style="font-size: 18px;">Calcolatore lotti Conto Fondato</h1>
+
+<table>
+    <tr>
+        <td><label for="accountCurrency">Valuta del Conto:</label></td>
+        <td>
+            <select id="accountCurrency">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="exchangeRate">EUR/USD:</label></td>
+        <td>
+            <input type="number" id="exchangeRate" step="0.0001" min="0" value="1.112">
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <td>
+            <input type="checkbox" id="disableExchangeRateCheckbox" checked>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="accountBalance">Saldo del Conto:</label></td>
+        <td>
+            <input type="number" id="accountBalance" step="0.01" min="0">
+            <input type="checkbox" id="accountBalanceCheckbox" checked>
+            <label for="accountBalanceCheckbox" style="cursor: pointer;"></label>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="riskPercentage">Percentuale di Rischio (%):</label></td>
+        <td>
+            <input type="number" id="riskPercentage" step="0.01" min="0" max="100" value="4">
+            <input type="checkbox" id="disableRiskPercentageCheckbox" checked>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="stopLossPips">Pips dallo Stop Loss:</label></td>
+        <td>
+            <input type="number" id="stopLossPips" step="1" min="0">
+            <button type="button" onclick="generateTakeProfitPips()">Genera TP</button>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="takeProfitPips">Pips dal Take Profit:</label></td>
+        <td>
+            <input type="number" id="takeProfitPips" step="1" min="0">
+            <input type="checkbox" id="disableTakeProfitPipsCheckbox" checked>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="pipValue">Valore del Pip del Pair:</label></td>
+        <td>
+            <input type="number" id="pipValue" step="0.0001" min="0" value="8.99">
+            <input type="checkbox" id="disablePipValueCheckbox" checked>
+        </td>
+    </tr>
+</table>
+
+<button id="calculateButton">Calcola Lottaggio</button>
+
+<div class="result-group">
+    <label for="lotSize">Lottaggio:</label>
+    <span id="lotSizeResult"></span>
+</div>
+<div class="result-group">
+    <label for="potentialProfit">Guadagno Possibile:</label>
+    <span id="potentialProfitResult" style="color: green;"></span>
+</div>
+<div class="result-group">
+    <label for="potentialLoss">Perdita Possibile:</label>
+    <span id="potentialLossResult" style="color: red;"></span>
+</div>
+            </td>
+            <td>
+                <div class="container">
+                    <h1 style="font-size: 18px;">Calcolatore lotti Conto Reale</h1>
+
+                    <table>
+                        <tr>
+                            <td><label for="accountCurrencyReal">Valuta del Conto:</label></td>
+                            <td>
+                                <select id="accountCurrencyReal">
+                                    <option value="EUR">EUR</option>
+                                    <option value="USD">USD</option>
+                                </select>
+                            </td>
+                        </tr>
+<tr>
+    <td><label for="exchangeRateReal">EUR/USD:</label></td>
+    <td><input type="number" id="exchangeRateReal" step="0.0001" min="0" value="1" disabled></td>
+</tr>
+                        <tr>
+  <td><label for="accountBalanceReal">Saldo del Conto Reale:</label></td>
+  <td>
+    <input type="number" id="accountBalanceReal" step="0.01" min="0">
+    <input type="checkbox" id="accountBalanceRealCheckbox" checked>
+    <label for="accountBalanceRealCheckbox" style="cursor: pointer;"></label>
+  </td>
+</tr>
+<tr>
+    <td><label for="riskPercentageReal">Percentuale di Rischio (%):</label></td>
+    <td><input type="number" id="riskPercentageReal" step="0.01" min="0" max="100" disabled></td>
+
+</tr>
+
+<tr>
+    <td><label for="stopLossPipsReal">Pips dallo Stop Loss:</label></td>
+    <td><input type="number" id="stopLossPipsReal" step="1" min="0" disabled></td>
+</tr>
+<tr>
+    <td><label for="takeProfitPipsReal">Pips dal Take Profit:</label></td>
+    <td><input type="number" id="takeProfitPipsReal" step="1" min="0" disabled></td>
+</tr>
+<tr>
+    <td><label for="pipValueReal">Valore del Pip del Pair:</label></td>
+    <td><input type="number" id="pipValueReal" step="0.0001" min="0" disabled></td>
+</tr>
+                    </table>
+
+                    <button id="calculateButtonReal">Calcola Lottaggio</button>
+
+                    <div class="result-group">
+                        <label for="lotSizeReal">Lottaggio:</label>
+                        <span id="lotSizeResultReal"></span>
+                    </div>
+                    <div class="result-group">
+                        <label for="potentialProfitReal">Guadagno Possibile:</label>
+                        <span id="potentialProfitResultReal" style="color: green;"></span>
+                    </div>
+                    <div class="result-group">
+                        <label for="potentialLossReal">Perdita Possibile:</label>
+                        <span id="potentialLossResultReal" style="color: red;"></span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script src="fase1.js"></script>
+</body>
+        </form>
+      </div>
+
+      <div class="form-content" id="fase2-form">
+        <!-- Contenuto del form per Fase 2 -->
+        <h2>Fase 2</h2>
+        <form>
+          <!-- Aggiungi i campi del form qui -->
+        </form>
+      </div>
+
+      <div class="form-content" id="profitto-form">
+        <!-- Contenuto del form per Profitto -->
+        <h2>Profitto</h2>
+        <form>
+          <!-- Aggiungi i campi del form qui -->
+        </form>
+      </div>
+
+      <div class="form-content" id="simulazione-form">
+        <!-- Contenuto del form per Simulazione -->
+        <h2>Simulazione</h2>
+        <form>
+          <!-- Aggiungi i campi del form qui -->
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+
+  <script src="sitocompleto.js"></script>
+</body>
+</html>
